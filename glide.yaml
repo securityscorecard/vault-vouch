@@ -1,0 +1,15 @@
+package: github.com/securityscorecard/vault-iam-vouch
+import:
+- package: github.com/aws/aws-sdk-go
+  version: ^1.10.35
+  subpackages:
+  - aws/session
+  - service/sts
+- package: github.com/hashicorp/vault
+  version: ^0.8.1
+  subpackages:
+  - logical
+- package: github.com/namsral/flag
+  version: ^1.7.4-pre
+- package: github.com/pkg/errors
+  version: ^0.8.0

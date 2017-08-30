@@ -1,0 +1,162 @@
+hash: a25f2ae4ad86bba6fc1cd9ffe31fb608a626e799ed3046edb703b06b9918b71a
+updated: 2017-08-30T18:36:11.637134666-03:00
+imports:
+- name: github.com/armon/go-radix
+  version: 1fca145dffbcaa8fe914309b1ec0cfc67500fe61
+- name: github.com/aws/aws-sdk-go
+  version: cb88a2c7ab16092bcf11a0aadeffce64b99274a2
+  subpackages:
+  - aws
+  - aws/awserr
+  - aws/awsutil
+  - aws/client
+  - aws/client/metadata
+  - aws/corehandlers
+  - aws/credentials
+  - aws/credentials/ec2rolecreds
+  - aws/credentials/endpointcreds
+  - aws/credentials/stscreds
+  - aws/defaults
+  - aws/ec2metadata
+  - aws/endpoints
+  - aws/request
+  - aws/session
+  - aws/signer/v4
+  - internal/shareddefaults
+  - private/protocol
+  - private/protocol/query
+  - private/protocol/query/queryutil
+  - private/protocol/rest
+  - private/protocol/xml/xmlutil
+  - service/sts
+- name: github.com/fatih/structs
+  version: 7e5a8eef611ee84dd359503f3969f80df4c50723
+- name: github.com/go-ini/ini
+  version: 3d73f4b845efdf9989fffd4b4e562727744a34ba
+- name: github.com/golang/protobuf
+  version: ab9f9a6dab164b7d1246e0e688b0ab7b94d8553e
+  subpackages:
+  - proto
+  - ptypes
+  - ptypes/any
+  - ptypes/duration
+  - ptypes/timestamp
+- name: github.com/golang/snappy
+  version: 553a641470496b2327abcac10b36396bd98e45c9
+- name: github.com/hashicorp/errwrap
+  version: 7554cd9344cec97297fa6649b055a8c98c2a1e55
+- name: github.com/hashicorp/go-cleanhttp
+  version: 3573b8b52aa7b37b9358d966a898feb387f62437
+- name: github.com/hashicorp/go-hclog
+  version: b39b96628f4f5079b214abead0e93e91ac29f9cf
+- name: github.com/hashicorp/go-multierror
+  version: 83588e72410abfbe4df460eeb6f30841ae47d4c4
+- name: github.com/hashicorp/go-plugin
+  version: 3e6d191694b5a3a2b99755f31b47fa209e4bcd09
+- name: github.com/hashicorp/go-rootcerts
+  version: 6bb64b370b90e7ef1fa532be9e591a81c3493e00
+- name: github.com/hashicorp/go-uuid
+  version: 64130c7a86d732268a38cb04cfbaf0cc987fda98
+- name: github.com/hashicorp/hcl
+  version: 8f6b1344a92ff8877cf24a5de9177bf7d0a2a187
+  subpackages:
+  - hcl/ast
+  - hcl/parser
+  - hcl/scanner
+  - hcl/strconv
+  - hcl/token
+  - json/parser
+  - json/scanner
+  - json/token
+- name: github.com/hashicorp/vault
+  version: 8d76a41854608c547a233f2e6292ae5355154695
+  subpackages:
+  - api
+  - helper/certutil
+  - helper/compressutil
+  - helper/consts
+  - helper/errutil
+  - helper/jsonutil
+  - helper/logformat
+  - helper/mlock
+  - helper/parseutil
+  - helper/pluginutil
+  - helper/wrapping
+  - logical
+- name: github.com/hashicorp/yamux
+  version: d1caa6c97c9fc1cc9e83bbe34d0603f9ff0ce8bd
+- name: github.com/jmespath/go-jmespath
+  version: bd40a432e4c76585ef6b72d3fd96fb9b6dc7b68d
+- name: github.com/mattn/go-colorable
+  version: ad5389df28cdac544c99bd7b9161a0b5b6ca9d1b
+- name: github.com/mattn/go-isatty
+  version: fc9e8d8ef48496124e79ae0df75490096eccf6fe
+- name: github.com/mgutz/ansi
+  version: 9520e82c474b0a04dd04f8a40959027271bab992
+- name: github.com/mgutz/logxi
+  version: aebf8a7d67ab4625e0fd4a665766fef9a709161b
+  subpackages:
+  - v1
+- name: github.com/mitchellh/go-homedir
+  version: b8bc1bf767474819792c23f32d8286a45736f1c6
+- name: github.com/mitchellh/go-testing-interface
+  version: 9a441910b16872f7b8283682619b3761a9aa2222
+- name: github.com/mitchellh/mapstructure
+  version: d0303fe809921458f417bcf828397a65db30a7e4
+- name: github.com/namsral/flag
+  version: 71ceffbeb0ba60fccc853971bb3ed4d7d90bfd04
+- name: github.com/pkg/errors
+  version: 645ef00459ed84a119197bfb8d8205042c6df63d
+- name: github.com/SermoDigital/jose
+  version: 2bd9b81ac51d6d6134fcd4fd846bd2e7347a15f9
+  subpackages:
+  - crypto
+  - jws
+  - jwt
+- name: github.com/sethgrid/pester
+  version: a86a2d88f4dc3c7dbf3a6a6bbbfb095690b834b6
+- name: golang.org/x/net
+  version: 66aacef3dd8a676686c7ae3716979581e8b03c47
+  subpackages:
+  - context
+  - http2
+  - http2/hpack
+  - idna
+  - internal/timeseries
+  - lex/httplex
+  - trace
+- name: golang.org/x/sys
+  version: 396c9fc8fb0ce27fc7a1ff136dc5af797bba258a
+  subpackages:
+  - unix
+- name: golang.org/x/text
+  version: 18c65dde6afd36dbc39197ca72008895b8dfbfb6
+  subpackages:
+  - secure/bidirule
+  - transform
+  - unicode/bidi
+  - unicode/norm
+- name: google.golang.org/genproto
+  version: ee236bd376b077c7a89f260c026c4735b195e459
+  subpackages:
+  - googleapis/rpc/status
+- name: google.golang.org/grpc
+  version: 3a378f9deb683b3a7d282e3c75dc2a35fb042977
+  subpackages:
+  - codes
+  - connectivity
+  - credentials
+  - grpclb/grpc_lb_v1/messages
+  - grpclog
+  - health
+  - health/grpc_health_v1
+  - internal
+  - keepalive
+  - metadata
+  - naming
+  - peer
+  - stats
+  - status
+  - tap
+  - transport
+testImports: []
