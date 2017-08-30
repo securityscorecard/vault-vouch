@@ -12,6 +12,8 @@ import (
 
 var HttpClient = http.DefaultClient
 
+// GetWrappedToken will return a wrapped token that's usable for accessing
+// Hashicorp Vault
 func GetWrappedToken(
 	vaultUrl string,
 	role string,
@@ -40,19 +42,19 @@ func GetWrappedToken(
 	defer resp.Body.Close()
 
 	enc := json.NewDecoder(resp.Body)
-	var awsResp logical.Response
-	errs := struct {
-		Errors []string `json:"errors"`
-	}{}
 
 	if resp.StatusCode != 200 {
+		errs := struct {
+			Errors []string `json:"errors"`
+		}{}
 		err = enc.Decode(&errs)
 		if err != nil {
-			return nil, errors.Wrap(err, "While decoding Error JSON")
+			return nil, errors.Wrap(err, "Decoding Error JSON")
 		}
 		return nil, errors.Wrap(errors.New(errs.Errors[0]), "Fetching Response")
 	}
 
+	var awsResp logical.Response
 	err = enc.Decode(&awsResp)
 	if err != nil {
 		return nil, err

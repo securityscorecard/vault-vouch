@@ -11,8 +11,8 @@ import (
 )
 
 var (
-	VaultAddress = flag.String("vault_addr", "", "Vault address")
 	fs           = flag.NewFlagSetWithEnvPrefix(os.Args[0], "IV", 0)
+	VaultAddress = fs.String("vault_addr", "", "Vault address")
 	Role         = fs.String("role", "", "Role to request from Vault")
 	WrapToken    = fs.Bool("wrap_token", true, "Do we want a wrapped token")
 	WrapTokenTTL = fs.String("wrap_token_ttl", "5m", "TTL for wrapped token")
@@ -20,7 +20,6 @@ var (
 
 func init() {
 	fs.Parse(os.Args[1:])
-	flag.Parse()
 }
 
 func main() {
