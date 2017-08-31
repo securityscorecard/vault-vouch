@@ -1,10 +1,10 @@
-hash: a25f2ae4ad86bba6fc1cd9ffe31fb608a626e799ed3046edb703b06b9918b71a
-updated: 2017-08-30T18:36:11.637134666-03:00
+hash: d21edb0067ae16617cd508a3fe512b85481f3fbc63b32d1a931c184c27285322
+updated: 2017-08-31T20:44:50.191477018-03:00
 imports:
 - name: github.com/armon/go-radix
   version: 1fca145dffbcaa8fe914309b1ec0cfc67500fe61
 - name: github.com/aws/aws-sdk-go
-  version: cb88a2c7ab16092bcf11a0aadeffce64b99274a2
+  version: b79a722cb7aba0edd9bd2256361ae2e15e98f8ad
   subpackages:
   - aws
   - aws/awserr
@@ -34,7 +34,7 @@ imports:
 - name: github.com/go-ini/ini
   version: 3d73f4b845efdf9989fffd4b4e562727744a34ba
 - name: github.com/golang/protobuf
-  version: ab9f9a6dab164b7d1246e0e688b0ab7b94d8553e
+  version: 83cd65fc365ace80eb6b6ecfc45203e43edfbc70
   subpackages:
   - proto
   - ptypes
@@ -130,7 +130,7 @@ imports:
   subpackages:
   - unix
 - name: golang.org/x/text
-  version: 18c65dde6afd36dbc39197ca72008895b8dfbfb6
+  version: e113a52b01bdd1744681b6ce70c2e3d26b58d389
   subpackages:
   - secure/bidirule
   - transform
@@ -141,8 +141,9 @@ imports:
   subpackages:
   - googleapis/rpc/status
 - name: google.golang.org/grpc
-  version: 3a378f9deb683b3a7d282e3c75dc2a35fb042977
+  version: 8233e124e4634a8313f2c9a1ea7d4db33546b11b
   subpackages:
+  - balancer
   - codes
   - connectivity
   - credentials
@@ -155,6 +156,7 @@ imports:
   - metadata
   - naming
   - peer
+  - resolver
   - stats
   - status
   - tap
