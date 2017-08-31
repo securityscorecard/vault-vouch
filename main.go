@@ -41,5 +41,5 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Printf("%s", *token)
+	fmt.Printf("%s", token)
 }

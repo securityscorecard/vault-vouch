@@ -51,10 +51,10 @@ func AssumeRoleGenerator(vaultAddress string, roleArn string) vault.Generator {
 
 // WrappedToken returns a token for the role provided with the wrapTTL provided
 // WARNING: If wrapTTL is a zero length duration we provide an unwrapped token
-func (a generator) WrappedToken(role string, wrapTTL time.Duration) (*string, error) {
+func (a generator) WrappedToken(role string, wrapTTL time.Duration) (string, error) {
 	payload, err := a.loginPayload(role)
 	if err != nil {
-		return nil, err
+		return "", err
 	}
 	req, err := http.NewRequest("POST", a.vaultAddr+awsAuthUrl, payload)
 	if wrapTTL.Seconds() > 0 {
@@ -62,7 +62,7 @@ func (a generator) WrappedToken(role string, wrapTTL time.Duration) (*string, er
 	}
 	r, err := httpClient.Do(req)
 	if err != nil {
-		return nil, err
+		return "", err
 	}
 	defer r.Body.Close()
 	e := json.NewDecoder(r.Body)
@@ -71,13 +71,13 @@ func (a generator) WrappedToken(role string, wrapTTL time.Duration) (*string, er
 		var token logical.Response
 		err = e.Decode(&token)
 		if err != nil {
-			return nil, err
+			return "", err
 		}
 
 		if wrapTTL.Seconds() > 0 {
-			return &token.WrapInfo.Token, nil
+			return token.WrapInfo.Token, nil
 		}
-		return &token.Auth.ClientToken, nil
+		return token.Auth.ClientToken, nil
 	}
 
 	errs := struct {
@@ -85,11 +85,13 @@ func (a generator) WrappedToken(role string, wrapTTL time.Duration) (*string, er
 	}{}
 	err = e.Decode(&errs)
 	if err != nil {
-		return nil, errors.Wrap(err, "Decoding response from Vault")
+		return "", errors.Wrap(err, "Decoding response from Vault")
 	}
-	return nil, errors.Wrap(errors.New(errs.Errors[0]), "Fetching response from Vault")
+	return "", errors.Wrap(errors.New(errs.Errors[0]), "Fetching response from Vault")
 }
 
+// loginPayload generates the request parameters for the call to Vault
+// based off Vault CLI code here: https://github.com/hashicorp/vault/blob/79b63deaf50c216e8b1d5edd12388ad85d137537/builtin/credential/aws/cli.go#L21-L70
 func (a generator) loginPayload(role string) (io.Reader, error) {
 	req, _ := a.sts.GetCallerIdentityRequest(&sts.GetCallerIdentityInput{})
 	err := req.Sign()
