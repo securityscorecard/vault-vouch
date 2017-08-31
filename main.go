@@ -7,7 +7,7 @@ import (
 	"time"
 
 	"github.com/namsral/flag"
-	"github.com/securityscorecard/vault-iam-vouch/vault"
+	"github.com/securityscorecard/vault-vouch/vault"
 )
 
 var (
