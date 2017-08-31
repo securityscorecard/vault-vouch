@@ -7,12 +7,12 @@ The only supported Trusted Third Party is currently AWS IAM.
 
 ## Usage
 
-| Command Argument   | Environment Variable | Default | Description                |
-|--------------------|----------------------|---------|----------------------------|
-| `-role=`           | `IV_ROLE`            | `nil`   | Role to request from Vault |
-| `-wrap_token=`     | `IV_WRAP_TOKEN`      | `true`  | Do we want a wrapped token |
-| `-wrap_token_ttl=` | `IV_WRAP_TOKEN_TTL`  | `5m`    | TTL for wrapped token      |
-| `-vault_addr=`     | `IV_VAULT_ADDR`      | `nil`   | Vault address              |
+| Command Argument   | Environment Variable | Default | Description                                                |
+|--------------------|----------------------|---------|------------------------------------------------------------|
+| `-role=`           | `IV_ROLE`            | `nil`   | Role to request from Vault                                 |
+| `-aws_arn_role=`   | `IV_AWS_ARN_ROLE`    | `nil`   | AWS role to assume before preparing auth payload for Vault |
+| `-vault_addr=`     | `IV_VAULT_ADDR`      | `nil`   | Vault address                                              |
+| `-wrap_token_ttl=` | `IV_WRAP_TOKEN_TTL`  | `5m`    | TTL for wrapped token, to disable wrapping set to `0`      |
 
 ## Example
 
