@@ -1,8 +1,6 @@
 language: go
 go:
-- 1.8
 - 1.9
-- tip
 install:
 - go get -v github.com/Masterminds/glide
 - cd $GOPATH/src/github.com/Masterminds/glide && git checkout 245caced2b16358b1c5e267691b17e9ee9952127
@@ -14,7 +12,8 @@ deploy:
   provider: releases
   api_key:
     secure: ehfAlRx7A25p6OhgJeXqBFoCC5nAqOo2WmB+5fzdEsPlwyK7/B/sR8fJ1w88d4OFBKNTi0+SCGAvXKo5mdqVZ4JO8I81gxhRcxLhqXaC2jVf8+8wy+9SVsGoI/LA9PptrwR4ePfnajWqzdhlOjeXt03c6OWTj1L7oWsO7/s/24NH+WE2OQ+5vNu7Bc2u5a6pbMmi6CChCgDdOoJve94dsZGoctVslkUGbzmndil9KKIWpk6w1MMnZYQI3mLFpcTL1KtAOgyarE0qF/x8G5Nn6fpSC5cNA8/9EZ3sl5Ry7I+n52Wm0DHoepW4M3T2WadzXKc1qx4p+kBrnKT0rIY23msludSGjNCI1kf4F5n8lBMFdWSL5Nb0Vmxa4UAl2/Ms+QySSDfNZuxs97i05R0EGrk9c+CBmTs1fuS5FIN6OsFqIaq44JeMEThKVQrAR/IVDhQPfAYt3tgxR2IPeF02L45swafCZjNwM0gpc0qFy1MIiO4t4av/p8kZstAa5V7aBcwIxzQJQ0YSPYEqPqUjXQXMgosfUsSCQnpFQVxzK0Qk3KsB4ptpYxNvIhDkW1tsuoUw6Zqgy/Asn4WulTd2OFjAsQa+X1rVxDKKCJOgj7+jfgESI2oA2PYIKOTFvfZpSa+Vl6LJbT24IlMWMZfUSg8gnHC9nfJ/25FxIVDUJck=
-  file: "./vault-vouch"
+  file: "vault-vouch"
+  skip_cleanup: true
   on:
     tags: true
     repo: securityscorecard/vault-vouch
