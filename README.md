@@ -1,4 +1,4 @@
-# vault-vouch
+# vault-vouch [![Build Status](https://travis-ci.org/securityscorecard/vault-vouch.svg?branch=master)](https://travis-ci.org/securityscorecard/vault-vouch)
 
 This tool is designed to act as glue between a Trusted Third Party & [Hashicorp Vault](https://www.vaultproject.io/). The
 target use case is with [consul-template](https://github.com/hashicorp/consul-template).
