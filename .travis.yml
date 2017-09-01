@@ -7,7 +7,7 @@ install:
   && go install && cd -
 - glide install
 script:
-- go build -o vault-vouch main.go
+- go build -a -v -tags 'netgo' -o vault-vouch main.go
 deploy:
   provider: releases
   api_key:
