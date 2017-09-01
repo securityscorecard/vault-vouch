@@ -19,11 +19,14 @@ var (
 	WrapTokenTTL = fs.String("wrap_token_ttl", "5m", "TTL for wrapped token")
 )
 
-func init() {
-	fs.Parse(os.Args[1:])
-}
-
 func main() {
+	err := fs.Parse(os.Args[1:])
+	if err != nil {
+		if err == flag.ErrHelp {
+			os.Exit(0)
+		}
+		log.Fatal(err)
+	}
 	wrapTokenTTL, err := time.ParseDuration(*WrapTokenTTL)
 	if err != nil {
 		log.Fatal(err)
