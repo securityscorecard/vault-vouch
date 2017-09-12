@@ -14,7 +14,8 @@ import (
 var (
 	fs           = flag.NewFlagSetWithEnvPrefix(os.Args[0], "IV", 0)
 	Role         = fs.String("role", "", "Role to request from Vault")
-	AwsArnRole   = fs.String("aws_arn_role", "", "AWS role to assume before preparing auth payload for Vault")
+	AwsArnRole   = fs.String("aws_arn_role", "", "ARN of AWS role to assume before preparing auth payload for Vault")
+	AwsRole      = fs.String("aws_role", "", "Name of AWS role on current account to assume before preparing auth payload for Vault")
 	VaultAddress = fs.String("vault_addr", "", "Vault address")
 	WrapTokenTTL = fs.String("wrap_token_ttl", "5m", "TTL for wrapped token")
 )
@@ -36,7 +37,9 @@ func main() {
 	}
 	var gen vault.Generator
 	if *AwsArnRole != "" {
-		gen = aws.AssumeRoleGenerator(*VaultAddress, *AwsArnRole)
+		gen = aws.AssumeRoleArnGenerator(*VaultAddress, *AwsArnRole)
+	} else if *AwsRole != "" {
+		gen = aws.AssumeRoleGenerator(*VaultAddress, *AwsRole)
 	} else {
 		gen = aws.DefaultGenerator(*VaultAddress)
 	}
