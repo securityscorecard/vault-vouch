@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/base64"
 	"encoding/json"
+	"fmt"
 	"io"
 	"io/ioutil"
 	"net/http"
@@ -38,15 +39,24 @@ func DefaultGenerator(vaultAddress string) vault.Generator {
 	}
 }
 
-// AssumeRoleGenerator returns a vault.Generator implementation that uses the provided
+// AssumeRoleArnGenerator returns a vault.Generator implementation that uses the provided
 // AWS role before generating the login payload for Vault
-func AssumeRoleGenerator(vaultAddress string, roleArn string) vault.Generator {
+func AssumeRoleArnGenerator(vaultAddress string, roleArn string) vault.Generator {
 	sess := session.Must(session.NewSession())
 	creds := stscreds.NewCredentials(sess, roleArn)
 	return &generator{
 		sts:       sts.New(sess, &aws.Config{Credentials: creds}),
 		vaultAddr: vaultAddress,
 	}
+}
+
+func AssumeRoleGenerator(vaultAddress string, role string) vault.Generator {
+	c := sts.New(session.Must(session.NewSession()))
+	resp, err := c.GetCallerIdentity(&sts.GetCallerIdentityInput{})
+	if err != nil {
+		panic(err)
+	}
+	return AssumeRoleArnGenerator(vaultAddress, fmt.Sprintf("arn:aws:iam:%s:role/%s", aws.StringValue(resp.Account), role))
 }
 
 // WrappedToken returns a token for the role provided with the wrapTTL provided
