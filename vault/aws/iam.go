@@ -56,7 +56,7 @@ func AssumeRoleGenerator(vaultAddress string, role string) vault.Generator {
 	if err != nil {
 		panic(err)
 	}
-	return AssumeRoleArnGenerator(vaultAddress, fmt.Sprintf("arn:aws:iam:%s:role/%s", aws.StringValue(resp.Account), role))
+	return AssumeRoleArnGenerator(vaultAddress, fmt.Sprintf("arn:aws:iam::%s:role/%s", aws.StringValue(resp.Account), role))
 }
 
 // WrappedToken returns a token for the role provided with the wrapTTL provided
