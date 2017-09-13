@@ -8,6 +8,8 @@ import (
 	"io"
 	"io/ioutil"
 	"net/http"
+	"os"
+	"strings"
 	"time"
 
 	"github.com/aws/aws-sdk-go/aws"
@@ -43,11 +45,39 @@ func DefaultGenerator(vaultAddress string) vault.Generator {
 // AWS role before generating the login payload for Vault
 func AssumeRoleArnGenerator(vaultAddress string, roleArn string) vault.Generator {
 	sess := session.Must(session.NewSession())
-	creds := stscreds.NewCredentials(sess, roleArn)
+	s := sts.New(sess)
+	// if the current credentials can't call GetCallerIdentity they can't be used for Vault, so we have to
+	// assume a role
+	if out, err := s.GetCallerIdentity(&sts.GetCallerIdentityInput{}); err != nil || !targetRoleIsRole(aws.StringValue(out.Arn), roleArn) {
+		if err != nil {
+			fmt.Fprintf(os.Stderr, "Error checking ARN of current credentials, calling AssumeRole\n")
+		} else {
+			fmt.Fprintf(os.Stderr, "IAM ARN to assume (%s) doesn't match current IAM ARN (%s), calling AssumeRole\n", roleArn, aws.StringValue(out.Arn))
+		}
+		creds := stscreds.NewCredentials(sess, roleArn)
+		return &generator{
+			sts:       sts.New(sess, &aws.Config{Credentials: creds}),
+			vaultAddr: vaultAddress,
+		}
+	}
+	fmt.Fprintf(os.Stderr, "roleArn to assume matches current roleArn, using as is\n")
 	return &generator{
-		sts:       sts.New(sess, &aws.Config{Credentials: creds}),
+		sts:       s,
 		vaultAddr: vaultAddress,
 	}
+}
+
+func targetRoleIsRole(current, target string) bool {
+	currentPieces := strings.Split(current, ":")
+	if currentPieces[2] == "iam" {
+		// can't be a role if the response is an iam ARN
+		return false
+	}
+
+	currentRole := strings.Split(currentPieces[5], "/")[1]
+	targetRole := strings.Split(strings.Split(target, ":")[5], "/")[1]
+
+	return currentRole == targetRole
 }
 
 func AssumeRoleGenerator(vaultAddress string, role string) vault.Generator {
