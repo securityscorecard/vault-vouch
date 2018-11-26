@@ -1,4 +1,4 @@
-FROM golang:1.9.5 AS builder
+FROM golang:1.11.1 AS builder
 
 WORKDIR /go/src/github.com/securityscorecard/vault-vouch
 ADD . .
