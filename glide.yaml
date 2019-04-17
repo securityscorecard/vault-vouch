@@ -6,9 +6,9 @@ import:
   - aws/session
   - service/sts
 - package: github.com/hashicorp/vault
-  version: ^0.8.1
+  version: sdk/v0.1.9
   subpackages:
-  - logical
+  - sdk/logical
 - package: github.com/namsral/flag
   version: ^1.7.4-pre
 - package: github.com/pkg/errors
